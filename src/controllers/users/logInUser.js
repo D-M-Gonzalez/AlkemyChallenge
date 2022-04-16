@@ -1,22 +1,25 @@
-import User from "../../models/user"
+import User from "../../models/user";
+import UserMessage from "../../messages/userMessages";
 
-export const logInUser = async (req,res)=>{
-    if(!req.body.user_name || !req.body.password){
-        return res.status(400).send({message: 'Content cannot be empty'})
-    }
+//Controller used to validate an user login request using JWT token
+export const logInUser = async (req, res) => {
+  const response = new UserMessage("validate");
+  if (!req.body.email || !req.body.password) {
+    response.setStatusMessage(406);
+  } else {
     try {
-        const checkUser = await User.exists({user_name: req.body.user_name})
-        const checkPassword = await User.exists({password: req.body.password})
-
-        if(checkUser && checkPassword) {
-            res.status(200).send({message: req.body.user_name})
-        } else {
-            res.status(400).send({message:"failed"})
-        }
-    } catch(error) {
-        res.status(500).json({
-            message: error.message || 'Something went wrong'
-        })
+      const checkUser = await User.findOne({ email: req.body.email });
+      const checkPassword =
+        checkUser.password === req.body.password ? true : false;
+      if (checkUser && checkPassword) {
+        response.setStatusMessage(200); 
+        response.setData(checkUser);
+      } else {
+        response.setStatusMessage(401);
+      }
+    } catch (error) {
+      response.setStatusMessage(500);
     }
-
-}
+  }
+  res.json(response); //returns the entire object with the stored status and data
+};

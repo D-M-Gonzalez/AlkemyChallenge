@@ -1,3 +1,4 @@
+//Pagination setup
 export const getPagination = (page,size) =>{
     const limit = size ? +size : 8;
     const offset = page ? page * limit : 0;
