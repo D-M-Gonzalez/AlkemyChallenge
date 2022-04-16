@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Paper from '@mui/material/Paper'
@@ -6,6 +6,7 @@ import image from "../../img/dollar.png"
 import Button from '@mui/material/Button'
 import { Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { logInUser } from '../../controller/logInUser'
 
 
 const background = {
@@ -14,11 +15,27 @@ const background = {
 }
 
 export default function Login() {
+	const [user, setUser] = useState({
+		email:"",
+		password:"",
+	})
 	const nav = useNavigate();
 
 	const handleClick = (event) => {
-		event.target.id === "login" && nav("/home/balance");
+		event.target.id === "login" && login();
 		event.target.id === "register" && nav("/register");
+	}
+
+	const handleChange = (event) => {
+		setUser({...user,[event.target.id]:event.target.value})
+	}
+
+	const login = async () => {
+		const response = await logInUser(user);
+		const storeUser = JSON.stringify(response.data);
+		sessionStorage.clear();
+		sessionStorage.setItem("user",storeUser);
+		nav("/home/balance")
 	}
 
   return (
@@ -33,12 +50,25 @@ export default function Login() {
 							<Grid container>
 								<Grid item md={2} xs={1}/>
 								<Grid item md={8} xs={10}>
-									<TextField id="email" label="Email" variant="outlined" sx={{marginTop:3,width:"100%"}}/>
+									<TextField 
+										id="email" 
+										label="Email" 
+										variant="outlined"
+										onChange={handleChange}
+										sx={{marginTop:3,width:"100%"}}
+										/>
 								</Grid>
 								<Grid item md={2} xs={1}/>
 								<Grid item md={2} xs={1}/>
 								<Grid item md={8} xs={10}>
-									<TextField id="password" label="Password" variant="outlined" sx={{marginTop:3,width:"100%"}}/>
+									<TextField 
+										id="password" 
+										label="Password" 
+										type="password"
+										variant="outlined"
+										onChange={handleChange}
+										sx={{marginTop:3,width:"100%"}}
+									/>
 								</Grid>
 								<Grid item md={2} xs={1}/>
 								<Grid item md={2} xs={1}/>

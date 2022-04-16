@@ -240,11 +240,21 @@ export default function Home() {
 	const [balance, setBalance] = useState(balanceObj);
 	const [srch, setSrch] = useState("");
 	const [total, setTotal] = useState();
+	const [user, setUser] = useState({});
 	const nav = useNavigate()
 
 	useEffect(()=>{
 		setTotal(balance.reduce(getSum, 0).toFixed(2));
 	},[balance])
+
+	useEffect(()=>{
+		const currentUser = JSON.parse(sessionStorage.getItem("user"))
+		setUser(currentUser);
+	},[])
+
+	const set_user = () => {
+		setUser(JSON.parse(sessionStorage.getItem("user")))
+	}
 
 	const get_srch = (data) => {
 		setSrch(data);
@@ -261,10 +271,12 @@ export default function Home() {
 		return total + (el.type === "in" ? el.value : (-el.value))
 	}
 
- 	return (
+	if(!user.id){
+		return <div>loading...</div>
+	} else	return (
 		 <div>
-			<HomeBar func={get_srch} totalBalance={total}/>	
-			<Outlet context={{obj:[balanceObj],searchString:[srch],func:[singleItem]}}/>
+			<HomeBar func={get_srch} totalBalance={total} user={user}/>	
+			<Outlet context={{obj:[balanceObj],searchString:[srch],func:[singleItem],funcUser:[set_user]}}/>
 		 </div>
   )
 }

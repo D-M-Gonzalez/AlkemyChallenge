@@ -51,7 +51,7 @@ export default function Balance() {
 	  <Container>
 			<Paper sx={{width:"100%"}}>
 				<Grid container mt={{md:15, xs:20}} alignItems="center">
-					<Grid container m={2} xs={12} alignItems="center">
+					<Grid item container m={2} xs={12} alignItems="center">
 						<Grid item container xs={12} justifyContent="center">
 							<Typography fontSize={{sm:30, sx:20}} fontWeight="bold">Account balance details:</Typography>
 						</Grid>
@@ -85,7 +85,7 @@ export default function Balance() {
 							<Grid item lg={0.1} md={0.2} sm={0.2} xs={0.2}/>
 						</Grid>
 						{Array.from(srchItems).map((el)=>{
-							return ((el !== "") && (<Grid item xs={12}><BalanceItem id={el.id} description={el.description} date={el.date} value={el.value} type={el.type}/></Grid>))
+							return ((el !== "") && (<Grid key={el.id} item xs={12}><BalanceItem id={el.id} description={el.description} date={el.date} value={el.value} type={el.type}/></Grid>))
 						})}
 					</Grid>
 						<Grid item xs={12}><Divider/></Grid>

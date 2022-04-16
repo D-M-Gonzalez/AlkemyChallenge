@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { logInUser } from '../../controller/logInUser';
+import { registerUser } from '../../controller/registerUser';
 
 const MySwal = withReactContent(Swal);
 
@@ -17,15 +19,31 @@ export default function SingleItem() {
     })
     const nav = useNavigate();
 
-    const handleAccept = () => {
-        MySwal.fire({
-            title: <strong>Account created succesfully!</strong>,
-            showConfirmButton: true,
-            confirmButtonText: "Okay",
-            confirmButtonColor: "forestgreen",
-          }).then(() => {
-            nav("/home/balance");
-          });
+    const handleAccept = async () => {
+        const response = await registerUser(data);
+        console.log("Status: " + response.status)
+        if (response.status === 200) {
+            MySwal.fire({
+                title: <strong>{response.message}!</strong>,
+                showConfirmButton: true,
+                confirmButtonText: "Okay",
+                confirmButtonColor: "forestgreen",
+              }).then(() => {
+                    const storeUser = JSON.stringify(response.data);
+                    sessionStorage.clear();
+                    sessionStorage.setItem("user",storeUser);
+                    nav("/home/balance");
+              });
+        } else {
+            MySwal.fire({
+                title: <strong>{response.message}!</strong>,
+                showConfirmButton: true,
+                confirmButtonText: "Okay",
+                confirmButtonColor: "forestgreen",
+              }).then(() => {
+                nav("/");
+              });           
+        }
     }
 
     const handleReject = () => {
