@@ -12,10 +12,11 @@ router.get('/',findAllUsers); //Gets all the users stored in the DB
 
 router.post('/',createUser); //Creates a new user
 
-router.put('/:id',updateUser); //Modifies an user by it's id as a parameter, requires token
+router.put('/:id',updateUser); //Modifies an user by it's id as a parameter
 
-router.delete('/:id',deleteUser); //Deletes an user by it's id as a parameter, requires token
+router.delete('/:id',deleteUser); //Deletes an user by it's id as a parameter
 
-router.post('/login/user',logInUser); //Validates and logs an user, if it is admin, generates a token
+router.post('/login/user',logInUser); //Validates and logs an user
+
 
 export default router;

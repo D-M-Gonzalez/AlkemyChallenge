@@ -24,5 +24,6 @@ export default class UserMessage {
         this.data.surname = docData.surname;
         this.data.address = docData.address;
         this.data.phonenumber = docData.phonenumber;
+        this.data.items = docData.items;
     }
 }

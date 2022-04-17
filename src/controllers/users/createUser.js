@@ -4,12 +4,11 @@ import UserMessage from "../../messages/userMessages";
 //Controller used to create a new user
 export const createUser = async (req, res) => {
   const response = new UserMessage("create");
-  console.log(req)
-  if (!req.body.email) {
+  if (!req.body.email) { //Checks if there is an email in the body
     response.setStatusMessage(406);
   }
   try {
-    const checkRepeated = await User.exists({ email: req.body.email });
+    const checkRepeated = await User.exists({ email: req.body.email }); //checks if it exists
     if (!checkRepeated) { //doesn't allow repeated usernames
       const newUser = new User({
         email: req.body.email,

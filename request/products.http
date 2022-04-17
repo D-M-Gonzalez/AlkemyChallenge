@@ -3,12 +3,13 @@ POST http://localhost:8000/api/users
 Content-Type: application/json
 
 {
-    "email": "ejemploss@gmail.com",
+    "email": "ocupadopapa@gmail.com",
     "password": "123456",
     "name": "Damian",
     "surname": "Gonzalez",
     "address": "asd 4305",
-    "phonenumber":4353454334
+    "phonenumber":4353454334,
+    "items": []
 }
 
 ###
@@ -25,4 +26,53 @@ Content-Type: application/json
 
 {
     "name":"Jhon Doe"
+}
+
+###
+POST http://localhost:8000/api/items
+Content-Type: application/json
+
+{
+    "user_id": "625ae23b3c237f8637cba301",
+    "description": "esteitem",
+    "category": "comida",
+    "date": "11-06-1989",
+    "value": "1234",
+    "type": "in"
+}
+
+###
+DELETE http://localhost:8000/api/items/
+Content-Type: application/json
+
+{
+    "user_id": "625ae23b3c237f8637cba301",
+    "item_id": "625af843fc432b0729a68379",
+    "description": "esteitem",
+    "category": "comida",
+    "date": "11-06-1989",
+    "value": "1234",
+    "type": "in"
+}
+
+###
+GET http://localhost:8000/api/items/
+Content-Type: application/json
+
+{
+    "user_id": "625ae23b3c237f8637cba301"
+}
+
+###
+PUT http://localhost:8000/api/items/
+Content-Type: application/json
+
+{
+    "user_id": "625ae23b3c237f8637cba301",
+    "item_id": "625af843fc432b0729a68379",
+    "description": "esteitem",
+    "category": "comida2",
+    "date": "11-06-1989",
+    "value": "1234",
+    "type": "in"
 }

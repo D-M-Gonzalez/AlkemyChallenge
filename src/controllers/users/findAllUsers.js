@@ -1,15 +1,12 @@
 import User from "../../models/user";
-import { getPagination } from "../../libs/getPagination";
 import UserMessage from "../../messages/userMessages";
 
 //Controller used to return a list of all users
 export const findAllUsers = async (req, res) => {
-  let response = [];
+  let response = []; //Prepares the response to return an array
   try {
-    const { size, page } = req.query;
-    const { limit, offset } = getPagination(page, size);
-    const list = await User.paginate({}, { offset, limit });
-    response = list.docs.map((el) => {
+    const list = await User.find() //Finds all users
+    response = list.map((el) => { //Maps each one in the response
       const doc = new UserMessage("locate");
       doc.setStatusMessage(200);
       doc.setData(el);

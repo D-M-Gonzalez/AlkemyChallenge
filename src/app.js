@@ -1,7 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import UserRoutes from './routes/userRoutes';
+import userRoutes from './routes/userRoutes';
+import itemsRoutes from './routes/itemsRoutes';
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.get('/', (req,res)=>{
     res.json({message: 'welcome to the Alkemy Challenge Backend'})
 })
 
-app.use('/api/users',UserRoutes); //Goes to users
+app.use('/api/users',userRoutes); //Goes to users
+
+app.use('/api/items',itemsRoutes); //Goes to items
 
 export default app;
