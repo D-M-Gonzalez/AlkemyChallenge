@@ -52,6 +52,14 @@ https://brilliant-cocada-34996f.netlify.app/
     Simply create a new folder and do run console:
     > npm start
 
+## Example user
+
+    user: ejemplo@gmail.com
+    password: 123456
+
+    User that has create/modify/delete rights bloqued. Used mainly to check the APP.
+    Any other user is fully able to run the APP
+
 ## Deploy
 
     APP is deployed in Netlify, doesn't need to do a production build.
