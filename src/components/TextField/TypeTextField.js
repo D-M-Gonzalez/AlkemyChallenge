@@ -4,6 +4,8 @@ import MenuItem from '@mui/material/MenuItem';
 
 const categories = ["in","out","ALL"];
 
+//Componente de opciones para el filtrado por tipo
+
 export default function TypeTextField(props) {
   	const [type, setType] = useState("ALL");
 

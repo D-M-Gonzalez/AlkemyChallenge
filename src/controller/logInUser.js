@@ -1,8 +1,8 @@
-export async function logInUser(input) { //Log in POST
+export async function logInUser(input) { //Controlador utilizado para loguear
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+      body: JSON.stringify({ //Ambos datos necesarios son pasados dentro del body
         email: input.email,
         password: input.password,
       }),
@@ -12,5 +12,5 @@ export async function logInUser(input) { //Log in POST
       requestOptions
     );
     const data = await response.json();
-    return data; //server does return an object, that contains a status code, a message, and all the data returned by the DB
+    return data; //Retorna un objeto que contiene el estado de la transacción, el mensage generado y los datos
   }

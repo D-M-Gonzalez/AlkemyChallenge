@@ -1,4 +1,4 @@
-export async function updateUser(input) { //Calls for the creation of a new user in the server  
+export async function updateUser(input) { //Controlador utilizado para modificar un usuario
     const requestOptions = {
       method: "PUT",
       headers: {
@@ -15,9 +15,9 @@ export async function updateUser(input) { //Calls for the creation of a new user
       }),
     };
     const response = await fetch(
-      `https://alkemychallengebackend.herokuapp.com/api/users/${input.id}`,
+      `https://alkemychallengebackend.herokuapp.com/api/users/${input.id}`, //Pasa la id por medio de query
       requestOptions
     );
     const data = await response.json();
-    return data; //server does return an object, that contains a status code, a message, and all the data returned by the DB
+    return data; //Retorna un objeto que contiene el estado de la transacción, el mensage generado y los datos
   }

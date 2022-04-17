@@ -3,6 +3,8 @@ import Grid from '@mui/material/Grid'
 import Intro from '../Intro/Intro'
 import Login from '../Login/Login'
 
+//Contenedor de la página principal, mostrando la intro y el form de login
+
 export default function Layout() {
   	return (
     	<Grid container>

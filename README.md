@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3ddcb01a-3642-49d3-8888-232be23f2be7/deploy-status)](https://app.netlify.com/sites/brilliant-cocada-34996f/deploys)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://brilliant-cocada-34996f.netlify.app/
 
-## Available Scripts
+# Front-end APP created for Alkemy Challenge
 
-In the project directory, you can run:
+## Intro
 
-### `npm start`
+    This APP was created to fullfil the objetives of the challenge. The APP can handle different users, and register money
+    movements for each one.
+    The APP can filter the movements and handle specific search querys. Each user is able to create/modify/delete the items.
+    Items are listed in descending date order.
+    The APP was created using React.js and MUI, done fully responsive.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Resoures
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Basic languages:** HTML/CSS/JavaScript
 
-### `npm test`
+    Based both Front-end and Back-end in MERN stack.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Frameworks:** React.js
 
-### `npm run build`
+    Chosed because of experience using it.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Libraries:** 
+    1. MUI: UI based in Material UI framework.
+    2. Sweet Alert2: It's a nice library to feedback the user.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Architecture
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    The APP is divided into:
 
-### `npm run eject`
+    ```mermaid
+    graph LR
+    A[root] --> B[src] --> D[components]
+    A --> C[public] --> G[assets
+    B --> E[container]
+    B --> F[controllers]
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **root:** Contains package data and this readme.
+- **src:** Contains index.js and App.js to handle APP loading.
+- **public:** Contains main page.
+- **assets:** Contains used images.
+- **components:** Contains every react functional component that doesn't have a child, from buttons, forms, dropdowns, etc.
+- **container:** Contains every parent of a functional component, and whose handle page navigation.
+- **controllers:** Contains JS functions to handle communication with the server.
+- **modules:** Contains JS scripts, like search.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How to run it
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    Simply create a new folder and do run console:
+    > npm start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Deploy
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    APP is deployed in Netlify, doesn't need to do a production build.

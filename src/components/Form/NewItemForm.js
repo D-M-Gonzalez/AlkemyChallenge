@@ -1,11 +1,12 @@
 import { Container, Grid, Paper, TextField, MenuItem, Typography, Button } from '@mui/material';
-import React, {useState, useEffect} from 'react'
-import { useOutletContext, useSearchParams, useNavigate } from 'react-router-dom';
+import React, {useState} from 'react'
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { createItem } from '../../controller/createItem';
 
 const categories = [
     {
@@ -40,9 +41,12 @@ const types = [
 
 const MySwal = withReactContent(Swal);
 
+//Form used in the creation of new items
+//Receives outlet context to notify the APP that there was an update in the DB to handle a refresh so changes are updated in the frontend
+
 export default function CreateNewItem() {
     const [selectedItem, setSelectedItem] = useState({
-        id:"",
+        user_id: JSON.parse(sessionStorage.getItem("user")).id,
         description:"",
         category:"Other",
         date:new Date(),
@@ -50,28 +54,33 @@ export default function CreateNewItem() {
         type:"in",
 
     });
+    const {func, funcFetch} = useOutletContext()
+	const [fetchData, setFetchData] = funcFetch;
 
     const nav = useNavigate();
 
     const handleCatChange = (event) => {
-        setSelectedItem({category:event.target.value});
+        setSelectedItem({...selectedItem,category:event.target.value});
     };
 
     const handleTypeChange = (event) => {
-        setSelectedItem({type:event.target.value});
+        setSelectedItem({...selectedItem,type:event.target.value});
     };
 
     const handleChanges = (event) => {
         setSelectedItem({...selectedItem,[event.target.id]:event.target.value,})
     }
 
-    const handleAccept = () => {
+    const handleAccept = async () => {
+        const response = await createItem(selectedItem);
+
         MySwal.fire({
-            title: <strong>New element created succesfully!</strong>,
+            title: <strong>{response.message}!</strong>,
             showConfirmButton: true,
             confirmButtonText: "Okay",
             confirmButtonColor: "forestgreen",
-          }).then(() => {
+          }).then(async () => {
+            await fetchData();
             nav(-1);
           });
     }
@@ -135,7 +144,7 @@ export default function CreateNewItem() {
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
                                 disableFuture
-                                label="Responsive"
+                                label="Date"
                                 openTo="year"
                                 views={['year', 'month', 'day']}
                                 value={selectedItem.date}

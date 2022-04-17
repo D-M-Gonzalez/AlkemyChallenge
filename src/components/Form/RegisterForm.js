@@ -1,12 +1,13 @@
-import { Container, Grid, Paper, TextField, MenuItem, Typography, Button } from '@mui/material';
-import React, {useState, useEffect} from 'react'
+import { Grid, Paper, TextField, Typography, Button } from '@mui/material';
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { logInUser } from '../../controller/logInUser';
 import { registerUser } from '../../controller/registerUser';
 
 const MySwal = withReactContent(Swal);
+
+//Form used in the modification of an item
 
 export default function SingleItem() {
     const [data, setData] = useState({

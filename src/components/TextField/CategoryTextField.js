@@ -4,6 +4,8 @@ import MenuItem from '@mui/material/MenuItem';
 
 const categories = ["Food","Expenses","Salary","Other","ALL"];
 
+//Componente de opciones para las categorias
+
 export default function CategoryTextField(props) {
   	const [category, setCategory] = useState("ALL");
 

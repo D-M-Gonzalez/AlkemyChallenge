@@ -8,6 +8,9 @@ import searchItem from '../../modules/search';
 import { Box } from '@mui/system';
 import TypeTextField from '../../components/TextField/TypeTextField';
 
+//Contenedor principal de los items, toma el contexto para actualizar los parametros de búsqueda
+//y llamar un refresh en el padre
+
 export default function Balance() {
 	const {obj, searchString} = useOutletContext()
 	const [items, setItems] = obj;
@@ -85,7 +88,7 @@ export default function Balance() {
 							<Grid item lg={0.1} md={0.2} sm={0.2} xs={0.2}/>
 						</Grid>
 						{Array.from(srchItems).map((el)=>{
-							return ((el !== "") && (<Grid key={el.id} item xs={12}><BalanceItem id={el.id} description={el.description} date={el.date} value={el.value} type={el.type}/></Grid>))
+							return ((el !== "") && (<Grid key={el._id} item xs={12}><BalanceItem id={el._id} description={el.description} date={new Date(el.date)} value={el.value} type={el.type}/></Grid>))
 						})}
 					</Grid>
 						<Grid item xs={12}><Divider/></Grid>

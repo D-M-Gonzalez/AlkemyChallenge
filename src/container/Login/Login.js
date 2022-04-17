@@ -7,12 +7,18 @@ import Button from '@mui/material/Button'
 import { Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { logInUser } from '../../controller/logInUser'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 
 const background = {
 	height: "100vh",
 	backgroundImage:`url(${image})`,
 }
+
+//Contenedor de la sección de login, que contiene el form para el mismo
 
 export default function Login() {
 	const [user, setUser] = useState({
@@ -32,10 +38,28 @@ export default function Login() {
 
 	const login = async () => {
 		const response = await logInUser(user);
-		const storeUser = JSON.stringify(response.data);
-		sessionStorage.clear();
-		sessionStorage.setItem("user",storeUser);
-		nav("/home/balance")
+        if (response.status === 200) {
+            MySwal.fire({
+                title: <strong>{response.message}!</strong>,
+                showConfirmButton: true,
+                confirmButtonText: "Okay",
+                confirmButtonColor: "forestgreen",
+              }).then(() => {
+                    const storeUser = JSON.stringify(response.data);
+                    sessionStorage.clear();
+                    sessionStorage.setItem("user",storeUser);
+                    nav("/home/balance");
+              });
+        } else {
+            MySwal.fire({
+                title: <strong>{response.message}!</strong>,
+                showConfirmButton: true,
+                confirmButtonText: "Okay",
+                confirmButtonColor: "forestgreen",
+              }).then(() => {
+                nav("/");
+              });           
+        }
 	}
 
   return (

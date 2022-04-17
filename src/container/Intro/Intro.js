@@ -3,6 +3,8 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { Card, CardMedia } from '@mui/material'
 
+//Contenedor de la página de inicio, solo muestra datos por ahora
+
 export default function Intro() {
   return (
     <Grid container>

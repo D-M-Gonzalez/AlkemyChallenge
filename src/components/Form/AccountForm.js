@@ -1,4 +1,4 @@
-import { Container, Grid, Paper, TextField, MenuItem, Typography, Button } from '@mui/material';
+import { Grid, Paper, TextField, Typography, Button } from '@mui/material';
 import React, {useState, useEffect} from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import Swal from "sweetalert2";
@@ -6,6 +6,10 @@ import withReactContent from "sweetalert2-react-content";
 import { updateUser } from '../../controller/updateUser';
 
 const MySwal = withReactContent(Swal);
+
+//Form component to handle account modification
+//Uses outlet context to pass a function that will update the user in the session storage
+//and notify the APP bar to update name and avatar
 
 export default function AccountForm(props) {
     const {funcUser} = useOutletContext()
@@ -34,14 +38,12 @@ export default function AccountForm(props) {
                 sessionStorage.clear();
                 sessionStorage.setItem("user",storeUser);
                 changeUser();
-                nav({
-                    pathname:"/home/balance",
-                })
+                nav(-1)
           });
     }
 
     const handleReject = () => {
-        MySwal.fire({ //Fires a warning before doing the deletion
+        MySwal.fire({
             title: <strong>Are you sure?</strong>,
             html: <i>Changes won't be saved!</i>,
             showDenyButton: true,

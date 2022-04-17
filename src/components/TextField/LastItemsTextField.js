@@ -4,6 +4,8 @@ import MenuItem from '@mui/material/MenuItem';
 
 const currencies = [10,20,50,100,"ALL"];
 
+//Componente de opciones para el filtrado por cantidad
+
 export default function LastItemsTextField(props) {
   	const [currency, setCurrency] = useState(10);
 

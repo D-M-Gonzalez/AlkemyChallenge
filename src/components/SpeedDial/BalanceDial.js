@@ -14,6 +14,8 @@ const actions = [
   { icon: <PrintIcon />, name: 'Print movements' },
 ];
 
+//Dial utilizado para las acciones, no implementado.
+
 export default function BalanceDial() {
   return (
       <SpeedDial

@@ -11,6 +11,9 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
+//Barra de navegación principal, con funcionalidad de buscar, muestra el balance total
+//y nos permite acceder a las opciones de la cuenta
+
 export default function HomeBar(props) {
 	const [search, setSearch] = useState();
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -54,7 +57,6 @@ export default function HomeBar(props) {
 	}
 
 	useEffect(()=>{
-		console.log(props.user)
 		const name = props.user.name.toString();
 		const surname = props.user.surname.toString();
 		setAvatar(name[0].toUpperCase() + surname[0].toUpperCase())

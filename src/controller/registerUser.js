@@ -1,4 +1,4 @@
-export async function registerUser(input) { //Calls for the creation of a new user in the server  
+export async function registerUser(input) { //Controlador utilizado para crear un nuevo usuario
     const requestOptions = {
       method: "POST",
       headers: {
@@ -19,5 +19,5 @@ export async function registerUser(input) { //Calls for the creation of a new us
       requestOptions
     );
     const data = await response.json();
-    return data; //server does return an object, that contains a status code, a message, and all the data returned by the DB
+    return data; //Retorna un objeto que contiene el estado de la transacción, el mensage generado y los datos
   }

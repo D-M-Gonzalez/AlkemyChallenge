@@ -6,6 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { modifyItem } from '../../controller/modifyItem';
 
 const categories = [
     {
@@ -39,11 +40,17 @@ const types = [
 
 const MySwal = withReactContent(Swal);
 
+//Form used in the modification of 
+
 export default function SingleItem() {
-    const {obj} = useOutletContext();
+    const {obj,funcFetch} = useOutletContext();
 	const [items, setItems] = obj;
+    const [fetchData, setFetchData] = funcFetch;
+    const [searchParams, setSearchParams] = useSearchParams();
+    const nav = useNavigate();
     const [selectedItem, setSelectedItem] = useState({
-        id:undefined,
+        user_id:undefined,
+        item_id:undefined,
         description:undefined,
         category:undefined,
         date:undefined,
@@ -51,8 +58,6 @@ export default function SingleItem() {
         type:undefined,
 
     });
-    const [searchParams, setSearchParams] = useSearchParams();
-    const nav = useNavigate();
 
     const handleCatChange = (event) => {
         setSelectedItem({category:event.target.value});
@@ -66,13 +71,15 @@ export default function SingleItem() {
         setSelectedItem({...selectedItem,[event.target.id]:event.target.value,})
     }
 
-    const handleAccept = () => {
+    const handleAccept = async () => {
+        const response = await modifyItem(selectedItem);
         MySwal.fire({
-            title: <strong>Element modified succesfully!</strong>,
+            title: response.message,
             showConfirmButton: true,
             confirmButtonText: "Okay",
             confirmButtonColor: "forestgreen",
-          }).then(() => {
+          }).then(async () => {
+              await fetchData();
             nav(-1);
           });
     }
@@ -103,15 +110,16 @@ export default function SingleItem() {
     useEffect(()=>{
         const item = items.filter((el)=>{
             let chosen = null;
-            if( el.id === searchParams.get("id")){
+            if( el._id === searchParams.get("id")){
                 chosen = el;
             }
             return chosen;
         })
+        item[0].user_id=JSON.parse(sessionStorage.getItem("user")).id;
         setSelectedItem(item[0]);
     },[])
 
-        if (!selectedItem.id){
+        if (!selectedItem._id){
             return "loading data";
         } else
         return (
